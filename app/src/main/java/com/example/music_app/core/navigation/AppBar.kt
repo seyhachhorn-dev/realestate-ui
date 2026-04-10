@@ -31,6 +31,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.music_app.R
 import com.example.music_app.feature.home.MainScreen
+import com.example.music_app.feature.profile.ProfileScreen
 import com.example.music_app.feature.splash.SplashScreen
 
 
@@ -69,6 +70,7 @@ fun AppNav(){
 
                 }
                 composable(Screen.Home.route){ MainScreen() }
+                composable (Screen.Profile.route){ ProfileScreen(navController) }
 
 
 
@@ -117,7 +119,7 @@ private fun BottomBar(
             .padding(4.dp)
           .clip(RoundedCornerShape(50.dp)),
 
-    containerColor = colorResource(R.color.black), // ✅ THIS is the real background
+    containerColor = colorResource(R.color.black),
 
         contentColor = Color.Transparent,
         tonalElevation = 0.dp
