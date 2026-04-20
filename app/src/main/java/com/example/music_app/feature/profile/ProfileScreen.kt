@@ -50,7 +50,7 @@ fun ProfileScreenContent(onBack: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
-                    painter = painterResource(R.drawable.profile),
+                    painter = painterResource(R.drawable.seyhaprofile),
                     contentDescription = "Profile Picture",
                     modifier = Modifier
                         .size(160.dp)
@@ -59,14 +59,14 @@ fun ProfileScreenContent(onBack: () -> Unit) {
                 )
                 Spacer(modifier = Modifier.height(24.dp))
                 Text(
-                    text = "Sara Anderson",
+                    text = "Seyha Jr",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = colorResource(R.color.black)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = "sara.anderson@example.com",
+                    text = "seyha.student@npic.com",
                     fontSize = 18.sp,
                     color = colorResource(R.color.grey)
                 )

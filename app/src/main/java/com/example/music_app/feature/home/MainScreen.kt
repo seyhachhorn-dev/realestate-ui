@@ -7,16 +7,20 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -34,12 +38,15 @@ fun MainScreen(viewModel: PropertyViewModel = viewModel()){
     val isLoading by viewModel.isLoading
     val error by viewModel.error
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White)
+    ) {
         LazyColumn (
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .statusBarsPadding()
-                .background(color = colorResource(R.color.LightGrey)),
+                .background(Color.White),
             contentPadding = PaddingValues(bottom = 100.dp)
         ){
             item { HeaderSection()}
@@ -48,9 +55,16 @@ fun MainScreen(viewModel: PropertyViewModel = viewModel()){
             item { Spacer(Modifier.height(16.dp)) }
             item { CategoriesRow() }
             
-            if (error != null) {
+            if (!isLoading && (error != null || properties.isEmpty())) {
                 item {
-                    Text(text = error ?: "Unknown error", modifier = Modifier.fillMaxWidth())
+                    Text(
+                        text = "No data are available yet",
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 32.dp),
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                 }
             }
 

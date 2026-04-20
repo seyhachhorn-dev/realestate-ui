@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.AsyncImage
 import com.example.music_app.R
 import com.example.music_app.core.model.Property
 import com.example.music_app.utils.getDrawableId
@@ -46,9 +45,12 @@ fun PropertiesCard(item: Property){
 
     ) {
         Box {
-            // Using AsyncImage for network images
-            AsyncImage(
-                model = "http://10.0.2.2:9090${item.pickPath}", 
+            // Updated to load from local drawables using pickPath
+            val imageName = item.pickPath.substringBefore(".")
+            val drawableId = getDrawableId(imageName)
+            
+            Image(
+                painter = if (drawableId != 0) painterResource(id = drawableId) else painterResource(id = R.drawable.pic_1),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -56,9 +58,7 @@ fun PropertiesCard(item: Property){
                     .height(233.dp)
                     .padding(12.dp)
                     .clip(RoundedCornerShape(30.dp)),
-                contentScale = ContentScale.Crop,
-                placeholder = painterResource(R.drawable.pic_1), // fallback
-                error = painterResource(R.drawable.pic_1) // fallback
+                contentScale = ContentScale.Crop
             )
 
             Text(

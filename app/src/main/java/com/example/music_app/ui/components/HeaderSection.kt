@@ -33,7 +33,7 @@ fun HeaderSection(){
             .statusBarsPadding(),
         verticalAlignment = Alignment.CenterVertically
     ){
-        Image(painter = painterResource(R.drawable.profile),
+        Image(painter = painterResource(R.drawable.seyhaprofile),
             contentDescription = null, modifier = Modifier
                 .size(45.dp)
                 .clip(CircleShape)
@@ -45,7 +45,7 @@ fun HeaderSection(){
                 .weight(1f)
         ){
             Text("Welcome", color = colorResource(R.color.grey), fontSize = 14.sp)
-            Text("Sara Anderson", color = colorResource(R.color.black),
+            Text("Seyha Jr", color = colorResource(R.color.black),
                 fontSize = 20.sp, fontWeight = FontWeight.Bold
             )
         }
