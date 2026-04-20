@@ -1,6 +1,5 @@
 package com.example.music_app.ui.components
 
-import android.content.res.Resources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import com.example.music_app.R
 import com.example.music_app.core.model.Property
 import com.example.music_app.utils.getDrawableId
@@ -46,16 +46,19 @@ fun PropertiesCard(item: Property){
 
     ) {
         Box {
-            Image(
-                painter = painterResource(getDrawableId(item.pickPath)), contentDescription = null,
+            // Using AsyncImage for network images
+            AsyncImage(
+                model = "http://10.0.2.2:9090${item.pickPath}", 
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(white)
                     .height(233.dp)
                     .padding(12.dp)
                     .clip(RoundedCornerShape(30.dp)),
-                contentScale = ContentScale.Crop
-
+                contentScale = ContentScale.Crop,
+                placeholder = painterResource(R.drawable.pic_1), // fallback
+                error = painterResource(R.drawable.pic_1) // fallback
             )
 
             Text(
@@ -111,14 +114,14 @@ fun PropertiesCard(item: Property){
 @Preview()
 @Composable
 fun PropertiesCardPreview() {
-    // Providing a dummy Property object for the preview to avoid NullPointerException
     PropertiesCard(
         item = Property(
+            id = 1,
             type = "House",
             title = "Modern Villa",
             address = "123 Main St",
             pickPath = "pic_1",
-            price = 500000,
+            price = 500.0,
             bed = 3,
             bath = 2,
             size = 200,

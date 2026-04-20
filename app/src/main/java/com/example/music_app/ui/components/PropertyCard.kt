@@ -55,11 +55,12 @@ fun PropertyCard(item: Property){
 fun PropertyCardPreview() {
     PropertyCard(
         item = Property(
+            id = 1,
             type = "Apartment",
             title = "Modern Luxury Apartment",
             address = "Phnom Penh, Cambodia",
             pickPath = "pic_1.jpg",
-            price = 120000,
+            price = 120000.0,
             bed = 3,
             bath = 2,
             size = 120,

@@ -1,0 +1,46 @@
+# API Integration Guide
+
+This guide explains how to fetch data from an API in this project structure using Retrofit, Gson, and Kotlin Coroutines.
+
+## 1. Setup Dependencies
+Add Retrofit, Gson converter, and OkHttp logging interceptor to your `libs.versions.toml` and `build.gradle.kts`. (Done)
+
+## 2. Permissions
+Add Internet permission to `AndroidManifest.xml`:
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+```
+If using a local server (http), add `android:usesCleartextTraffic="true"` to the `<application>` tag. (Done)
+
+## 3. Data Model (`core/model`)
+Create data classes that match your API response.
+- `Property.kt`: Contains `PropertyResponse`, `PropertyData`, and `Property` classes.
+
+## 4. API Service (`core/network`)
+Define your API endpoints using a Retrofit interface.
+- `PropertyApiService.kt`: Defines the `getProperties` GET request.
+
+## 5. Retrofit Client (`core/network`)
+Create a singleton to provide the Retrofit instance.
+- `RetrofitClient.kt`: Configures base URL and logging.
+  *Note: Use `http://10.0.2.2:9090` to access localhost from an Android Emulator.*
+
+## 6. Repository (`core/repository`)
+Create a repository class to abstract the data source.
+- `PropertyRepository.kt`: Calls the API service and returns the response.
+
+## 7. ViewModel (`feature/home`)
+Use a ViewModel to manage the UI state and launch coroutines.
+- `PropertyViewModel.kt`: Handles fetching data, loading states, and error messages.
+
+## 8. UI Layer (`feature/home` & `ui/components`)
+Observe the ViewModel state in your Composable screens.
+- `MainScreen.kt`: Observes `properties`, `isLoading`, and `error` from the ViewModel.
+- `PropertiesCard.kt`: Uses `AsyncImage` from Coil to load images from URLs.
+
+## Summary of Flow:
+1. **ViewModel** calls **Repository**.
+2. **Repository** calls **ApiService**.
+3. **ApiService** (Retrofit) performs the network request.
+4. Data flows back: **API -> Service -> Repository -> ViewModel**.
+5. **UI** observes **ViewModel** and updates automatically.
