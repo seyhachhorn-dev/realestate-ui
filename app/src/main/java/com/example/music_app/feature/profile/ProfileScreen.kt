@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.music_app.R
+import com.example.music_app.ui.components.OptionRow
 import com.example.music_app.ui.components.TopBar
 import com.example.music_app.ui.theme.MusicappTheme
 
@@ -70,10 +71,25 @@ fun ProfileScreenContent(onBack: () -> Unit) {
                     fontSize = 18.sp,
                     color = colorResource(R.color.grey)
                 )
+                Spacer(Modifier.height(4.dp))
+                Text("+855 77618782", fontSize = 16.sp, color = colorResource(R.color.black))
+//                Text("seyha.student@npic.com", fontSize = 16.sp, color = colorResource(R.color.black))
             }
         }
+        item { Spacer(Modifier.height(24.dp)) }
+        item { OptionRow("Account Information ") }
+        item { OptionRow("Secutiry") }
+        item { OptionRow("Notification") }
+        item { OptionRow("Language") }
+        item { OptionRow("Team & Condition") }
+        item { OptionRow("Privacy Policy") }
+        item { Spacer(Modifier.height(8.dp)) }
+
+
     }
-}
+
+    }
+
 
 @Preview(showBackground = true)
 @Composable
