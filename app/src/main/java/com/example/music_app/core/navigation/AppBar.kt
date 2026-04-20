@@ -2,7 +2,10 @@ package com.example.music_app.core.navigation
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -12,6 +15,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -43,7 +47,7 @@ fun AppNav(){
     val showBottomBar = currentRoute in bottomDestination.map { it.route }
 
     Scaffold(
-        containerColor = colorResource(R.color.grey),
+        containerColor = Color.White,
         contentWindowInsets = WindowInsets(0),
         bottomBar = {
             if (showBottomBar) {
@@ -70,6 +74,8 @@ fun AppNav(){
 
                 }
                 composable(Screen.Home.route){ MainScreen() }
+                composable(Screen.Explorer.route){ PlaceholderScreen("Explorer") }
+                composable(Screen.Bookmark.route){ PlaceholderScreen("Bookmark") }
                 composable (Screen.Profile.route){ ProfileScreen(navController) }
 
 
@@ -81,6 +87,17 @@ fun AppNav(){
     }
 
 
+}
+
+@Composable
+fun PlaceholderScreen(name: String) {
+    Box(modifier = Modifier.fillMaxSize().background(Color.White), contentAlignment = Alignment.Center) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = "$name Screen", color = Color.Black)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = "No data are available yet", color = Color.Gray)
+        }
+    }
 }
 
 
